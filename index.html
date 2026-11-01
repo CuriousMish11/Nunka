@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dishā Vaastu</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <meta name="description" content="Vaastu Shastra consultations for homes, offices and plots.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hind:wght@400;500;600&display=swap">
+  <style>
+    /* Layout: left-aligned editorial column; the hero pairs the pitch with a live Vastu Purusha Mandala, and every later section reuses its nine-zone grid. */
+    :root {
+      --ground: #ECEEE8;      /* limewash wall */
+      --paper: #F8F9F5;
+      --ink: #1C2048;         /* indigo */
+      --muted: #555A75;
+      --rule: #C7CAD6;
+      --turmeric: #A86E00;    /* text-safe accent */
+      --turmeric-fill: #E3A82B;
+      --sindoor: #A8321C;
+      --water: #D3E2EB;
+      --fire: #F2D5C7;
+      --earth: #E6DCC2;
+      --air: #DBE3D3;
+      --space: #F3E4AE;
+      --plain: #F8F9F5;
+      --font-display: "Rozha One", "Georgia", serif;
+      --font-body: "Hind", "Segoe UI", system-ui, sans-serif;
+      --step--1: 0.875rem;
+      --step-0: 1.0625rem;
+      --step-1: 1.3rem;
+      --step-2: 1.75rem;
+      --step-3: clamp(2.1rem, 5vw, 3.6rem);
+      --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+      --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --ground: #10122A; --paper: #181B38; --ink: #ECEAF5; --muted: #A4A7C3; --rule: #2E3262;
+        --turmeric: #EDB94A; --turmeric-fill: #D99A1E; --sindoor: #E7735A;
+        --water: #1C3350; --fire: #4A241B; --earth: #3A3119; --air: #233223; --space: #3F3411; --plain: #181B38;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --ground: #10122A; --paper: #181B38; --ink: #ECEAF5; --muted: #A4A7C3; --rule: #2E3262;
+      --turmeric: #EDB94A; --turmeric-fill: #D99A1E; --sindoor: #E7735A;
+      --water: #1C3350; --fire: #4A241B; --earth: #3A3119; --air: #233223; --space: #3F3411; --plain: #181B38;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: var(--ground);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: var(--step-0);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: var(--gutter-l);
+      padding-right: var(--gutter-r);
+    }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.12; text-wrap: balance; margin: 0; }
+    h2 { font-size: var(--step-2); }
+    h3 { font-size: var(--step-1); }
+    p { margin: 0; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--turmeric-fill); outline-offset: 3px; }
+    .eyebrow {
+      font-size: var(--step--1);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--turmeric);
+    }
+    .deva { font-family: var(--font-display); }
+
+    /* Header */
+    .top { border-bottom: 1px solid var(--rule); }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+    .brand b { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; }
+    .brand span { color: var(--muted); font-size: var(--step--1); }
+    .top nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: var(--step--1); font-weight: 500; }
+    .top nav a { text-decoration: none; color: var(--muted); }
+    .top nav a:hover { color: var(--ink); }
+
+    /* Hero */
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; padding-block: 56px 72px; align-items: start; }
+    .hero-copy { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    .hero h1 { font-size: var(--step-3); }
+    .hero h1 em { font-style: normal; color: var(--turmeric); }
+    .lede { font-size: var(--step-1); color: var(--muted); max-width: 32ch; line-height: 1.45; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .btn {
+      display: inline-block; padding: 12px 22px; border-radius: 2px; font-weight: 600;
+      text-decoration: none; border: 1.5px solid var(--ink); font: inherit; font-weight: 600; cursor: pointer;
+    }
+    .btn.primary { background: var(--ink); color: var(--ground); }
+    .btn.ghost { background: transparent; color: var(--ink); }
+    .hero-facts { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--rule); }
+    .hero-facts div { display: flex; flex-direction: column; }
+    .hero-facts b { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1; }
+    .hero-facts span { font-size: var(--step--1); color: var(--muted); }
+
+    /* Mandala explorer */
+    .mandala { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    .mandala svg { width: 100%; max-width: 480px; height: auto; display: block; margin: 0 auto; }
+    .zone { cursor: pointer; }
+    .zone rect.zfill { stroke: var(--ink); stroke-width: 1.5; transition: filter .2s; }
+    .zone:hover rect.zfill { filter: brightness(0.95); }
+    .zone.on rect.zfill { stroke: var(--turmeric-fill); stroke-width: 4; }
+    .zone:focus { outline: none; }
+    .zone:focus-visible rect.zfill { stroke: var(--turmeric-fill); stroke-width: 4; }
+    .pada { fill: none; stroke: var(--rule); stroke-width: 0.75; pointer-events: none; }
+    .zlabel { font-family: var(--font-body); font-weight: 600; font-size: 15px; fill: var(--ink); pointer-events: none; }
+    .zsub { font-family: var(--font-body); font-size: 10.5px; fill: var(--muted); pointer-events: none; letter-spacing: .06em; text-transform: uppercase; }
+    .compass { font-family: var(--font-display); font-size: 18px; fill: var(--turmeric); }
+    .detail {
+      background: var(--paper); border: 1px solid var(--rule); padding: 20px 22px;
+      display: grid; gap: 10px; max-width: 480px; width: 100%; margin: 0 auto;
+    }
+    .detail-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .detail-head h3 { font-size: var(--step-1); }
+    .detail-head .deva { color: var(--turmeric); font-size: var(--step-1); }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { font-size: var(--step--1); padding: 2px 10px; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
+    .chip b { color: var(--ink); font-weight: 600; }
+    .detail dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 4px 0 0; font-size: var(--step--1); }
+    .detail dt { font-weight: 600; }
+    .detail dd { margin: 0; color: var(--muted); }
+    .detail dt.avoid { color: var(--sindoor); }
+
+    /* Sections */
+    section.band { border-top: 1px solid var(--rule); }
+    section.band > .wrap { padding-block: 72px; display: grid; gap: 36px; }
+    .sec-head { display: grid; gap: 10px; max-width: 62ch; }
+    .sec-head p { color: var(--muted); }
+
+    .services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1.5px solid var(--ink); }
+    .service { padding: 24px 24px 28px 0; display: grid; gap: 8px; border-bottom: 1px solid var(--rule); align-content: start; }
+    .service:nth-child(odd) { padding-right: 32px; border-right: 1px solid var(--rule); }
+    .service:nth-child(even) { padding-left: 32px; }
+    .service p { color: var(--muted); }
+    .service ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: var(--step--1); }
+
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; counter-reset: s; }
+    .steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 3px solid var(--turmeric-fill); }
+    .steps li::before { content: counter(s); font-family: var(--font-display); font-size: var(--step-2); line-height: 1; color: var(--turmeric); }
+    .steps h3 { font-size: 1.15rem; }
+    .steps p { color: var(--muted); font-size: var(--step--1); }
+
+    .table-wrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--rule); }
+    table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: var(--step--1); }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    thead th { font-size: 0.75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    tbody th { font-weight: 600; }
+    tbody tr:last-child > * { border-bottom: 0; }
+    td.best { color: var(--ink); font-weight: 600; }
+    td.ok { color: var(--muted); }
+    td.no { color: var(--sindoor); }
+    .note { font-size: var(--step--1); color: var(--muted); max-width: 70ch; }
+
+    /* Consult */
+    .consult { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 48px; align-items: start; }
+    .contact { display: grid; gap: 18px; }
+    .contact dl { margin: 0; display: grid; gap: 14px; }
+    .contact dt { font-size: 0.75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .contact dd { margin: 0; font-size: var(--step-1); }
+    .ph { border-bottom: 1.5px dashed var(--turmeric-fill); }
+    form { background: var(--paper); border: 1px solid var(--rule); padding: 28px; display: grid; gap: 16px; }
+    .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    label { display: grid; gap: 6px; font-size: var(--step--1); font-weight: 600; }
+    input, select, textarea {
+      font: inherit; font-weight: 400; color: var(--ink); background: var(--ground);
+      border: 1px solid var(--rule); border-radius: 2px; padding: 10px 12px; width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--turmeric-fill); outline-offset: 0; border-color: transparent; }
+    textarea { min-height: 110px; resize: vertical; }
+    .form-note { font-size: 0.8rem; color: var(--muted); }
+    .done { background: var(--space); color: var(--ink); padding: 14px 16px; font-size: var(--step--1); }
+
+    /* Rashi and rashifal */
+    .rashi-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+    .rashi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    .rashi-tile {
+      font: inherit; color: var(--ink); background: var(--paper); cursor: pointer; text-align: left;
+      border: 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      padding: 14px 12px; display: grid; gap: 2px; min-width: 0;
+    }
+    .rashi-tile:hover { background: var(--ground); }
+    .rashi-tile .deva { font-size: 1.5rem; line-height: 1.2; }
+    .rashi-tile small { font-size: 0.8rem; color: var(--muted); }
+    .rashi-tile[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+    .rashi-tile[aria-pressed="true"] small { color: var(--ground); opacity: .75; }
+    .rashi-card { background: var(--paper); border: 1px solid var(--rule); padding: 24px; display: grid; gap: 14px; min-width: 0; }
+    .rashi-card .detail-head h3 { font-size: var(--step-2); }
+    .rashi-card .detail-head .deva { color: var(--turmeric); font-size: var(--step-2); }
+    .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; margin: 0; }
+    .facts div { display: grid; }
+    .facts dt { font-size: 0.75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .facts dd { margin: 0; font-weight: 600; }
+    .tip { border-left: 3px solid var(--turmeric-fill); padding-left: 14px; font-size: var(--step--1); }
+    .weekly { border-top: 1px solid var(--rule); padding-top: 14px; display: grid; gap: 6px; }
+    .weekly .eyebrow { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .weekly .eyebrow span { color: var(--muted); letter-spacing: .04em; text-transform: none; font-weight: 500; }
+    .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
+    .check input { width: auto; }
+
+    footer { border-top: 1px solid var(--rule); }
+    footer .wrap { padding-block: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: var(--step--1); color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .hero .wrap, .consult, .rashi-layout { grid-template-columns: minmax(0, 1fr); }
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      .services { grid-template-columns: minmax(0, 1fr); }
+      .service:nth-child(odd), .service:nth-child(even) { padding: 22px 0; border-right: 0; }
+      .steps, .row { grid-template-columns: minmax(0, 1fr); }
+      .rashi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .rashi-card { padding: 20px; }
+      .hero .wrap { padding-block: 36px 48px; }
+      section.band > .wrap { padding-block: 52px; }
+      form { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#top" id="top"><b>Dishā Vaastu</b><span class="deva">दिशा वास्तु</span></a>
+      <nav aria-label="Sections">
+        <a href="#mandala">Mandala</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#rooms">Room guide</a>
+        <a href="#rashi">Rashifal</a>
+        <a href="#kundli">Kundli</a>
+        <a href="#consult">Consult</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-copy">
+          <span class="eyebrow">Vaastu Shastra &amp; Jyotish</span>
+          <h1>Set your home in tune with the <em>eight directions</em>.</h1>
+          <p class="lede">Practical Vaastu guidance for homes, offices and plots, with remedies that rarely need a hammer.</p>
+          <div class="actions">
+            <a class="btn primary" href="#consult">Book a consultation</a>
+            <a class="btn ghost" href="#mandala">Explore the mandala</a>
+          </div>
+          <div class="hero-facts">
+            <div><b>81</b><span>padas in the mandala</span></div>
+            <div><b>8 + 1</b><span>directions and the centre</span></div>
+            <div><b>5</b><span>elements, the pañcabhūta</span></div>
+          </div>
+        </div>
+
+        <div class="mandala" id="mandala">
+          <svg viewBox="-34 -34 428 428" role="group" aria-label="Vastu Purusha Mandala. Select a zone to read about it.">
+            <g id="zones"></g>
+            <g id="padas"></g>
+            <text class="compass" x="180" y="-12" text-anchor="middle">N</text>
+            <text class="compass" x="180" y="388" text-anchor="middle">S</text>
+            <text class="compass" x="384" y="186" text-anchor="middle">E</text>
+            <text class="compass" x="-22" y="186" text-anchor="middle">W</text>
+          </svg>
+          <div class="detail" aria-live="polite">
+            <div class="detail-head"><h3 id="d-name">Ishanya · North-east</h3><span class="deva" id="d-deva">ईशान्य</span></div>
+            <div class="chips" id="d-chips"></div>
+            <p id="d-text"></p>
+            <dl>
+              <dt>Suits</dt><dd id="d-suits"></dd>
+              <dt class="avoid">Avoid</dt><dd id="d-avoid"></dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="services">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="eyebrow">Services</span>
+          <h2>One method, four kinds of property</h2>
+          <p>Every consultation starts from your plan and a compass reading taken at the centre of the property. The advice changes with what you are building, buying or living in.</p>
+        </div>
+        <div class="services">
+          <div class="service">
+            <h3>Home</h3>
+            <p>A zone-by-zone reading of your flat or house: entrance, kitchen, bedrooms, puja room and the centre.</p>
+            <ul><li>Existing homes and new purchases</li><li>Bedroom and sleeping-direction advice</li></ul>
+          </div>
+          <div class="service">
+            <h3>Office and shop</h3>
+            <p>Placement of the owner's cabin, cash counter, reception and pantry, so the space supports the work done in it.</p>
+            <ul><li>Seating and facing directions</li><li>Entrance and signage placement</li></ul>
+          </div>
+          <div class="service">
+            <h3>Plot selection</h3>
+            <p>Before you buy, we check the plot's shape, slope, road position and surroundings.</p>
+            <ul><li>Square and rectangular plot checks</li><li>Road-facing (vīthī) assessment</li></ul>
+          </div>
+          <div class="service">
+            <h3>Remedies without demolition</h3>
+            <p>Corrections through placement, colour, lighting and use of space, ranked from simplest to most involved.</p>
+            <ul><li>Furniture and storage shifts</li><li>Colour and element balancing</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="process">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="eyebrow">How a consultation works</span>
+          <h2>From floor plan to follow-up</h2>
+        </div>
+        <ol class="steps">
+          <li><h3>Share your plan</h3><p>Send the floor plan or plot drawing, a few photos and the address.</p></li>
+          <li><h3>Direction reading</h3><p>A compass reading from the Brahmasthan fixes true orientation and the zones.</p></li>
+          <li><h3>Zone analysis</h3><p>Each room is checked against its zone, its element and its use.</p></li>
+          <li><h3>Remedy report</h3><p>A written report, with fixes ordered from easiest to largest.</p></li>
+          <li><h3>Follow-up</h3><p>A review call after changes, to answer questions and adjust.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band" id="rooms">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="eyebrow">Room guide</span>
+          <h2>Where each room belongs</h2>
+          <p>The usual recommendations by zone. Your plot, its entrance and your family's needs can change these, which is what a consultation is for.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Room</th><th scope="col">Best</th><th scope="col">Acceptable</th><th scope="col">Avoid</th></tr></thead>
+            <tbody id="room-rows"></tbody>
+          </table>
+        </div>
+        <p class="note">Directions are read from the centre of the property with a magnetic compass. Schools of Vaastu differ on some placements.</p>
+      </div>
+    </section>
+
+    <section class="band" id="rashi">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="eyebrow">Rashi &amp; weekly rashifal</span>
+          <h2>Your rashi and its direction</h2>
+          <p>In Jyotish your rashi is your Moon sign, read from your birth chart. Each rashi belongs to an element, and each element to a direction of the home. Choose your rashi to see its guide and this week's rashifal.</p>
+        </div>
+        <div class="rashi-layout">
+          <div class="rashi-grid" id="rashi-grid" role="group" aria-label="Choose your rashi"></div>
+          <article class="rashi-card" aria-live="polite">
+            <div class="detail-head"><h3 id="r-name"></h3><span class="deva" id="r-deva"></span></div>
+            <dl class="facts">
+              <div><dt>Ruling planet</dt><dd id="r-planet"></dd></div>
+              <div><dt>Element</dt><dd id="r-element"></dd></div>
+              <div><dt>Favourable direction</dt><dd id="r-dir"></dd></div>
+              <div><dt>Colours</dt><dd id="r-colour"></dd></div>
+            </dl>
+            <p class="tip" id="r-tip"></p>
+            <div class="weekly">
+              <span class="eyebrow">This week <span id="r-week"></span></span>
+              <p id="r-weekly"></p>
+            </div>
+          </article>
+        </div>
+        <p class="note">Don't know your Moon sign? It depends on your exact time and place of birth. A kundli reading will tell you.</p>
+      </div>
+    </section>
+
+    <section class="band" id="kundli">
+      <div class="wrap consult">
+        <div class="contact">
+          <span class="eyebrow">Kundli reading</span>
+          <h2>A personal reading from your birth chart</h2>
+          <p class="note">Your kundli is drawn from the date, time and place of your birth. Readings are given by phone or video call, with a written summary afterwards.</p>
+          <dl>
+            <div><dt>Full kundli</dt><dd>Life overview, dashas and remedies</dd></div>
+            <div><dt>Kundli milan</dt><dd>Matching for marriage, both charts compared</dd></div>
+            <div><dt>Vaastu + kundli</dt><dd>Home directions matched to your chart</dd></div>
+          </dl>
+        </div>
+        <form id="k" novalidate>
+          <input type="hidden" name="_subject" value="New kundli reading request">
+          <div class="row">
+            <label for="k-name">Full name<input id="k-name" name="name" required autocomplete="name"></label>
+            <label for="k-contact">Phone or email<input id="k-contact" name="contact" required></label>
+          </div>
+          <div class="row">
+            <label for="k-date">Date of birth<input id="k-date" name="dob" type="date" required></label>
+            <label for="k-time">Time of birth<input id="k-time" name="tob" type="time"></label>
+          </div>
+          <label class="check" for="k-notime"><input id="k-notime" name="notime" type="checkbox"> I don't know my exact birth time</label>
+          <div class="row">
+            <label for="k-place">Place of birth<input id="k-place" name="pob" placeholder="City, state" required></label>
+            <label for="k-type">Reading
+              <select id="k-type" name="type">
+                <option>Full kundli</option><option>Kundli milan (marriage matching)</option>
+                <option>Career and finance</option><option>Vaastu + kundli</option>
+              </select>
+            </label>
+          </div>
+          <label for="k-msg">Questions or partner's birth details<textarea id="k-msg" name="message" placeholder="For kundli milan, add your partner's date, time and place of birth."></textarea></label>
+          <button class="btn primary" type="submit">Request a kundli reading</button>
+          <p class="form-note">Preview: requests are not sent until the Formspree form ID is added.</p>
+          <div class="done" id="k-done" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="band" id="consult">
+      <div class="wrap consult">
+        <div class="contact">
+          <span class="eyebrow">Book a consultation</span>
+          <h2>Tell us about your property</h2>
+          <p class="note">On-site visits in the city, and online consultations anywhere using your floor plan.</p>
+          <dl>
+            <div><dt>Phone</dt><dd><span class="ph">Add your phone number</span></dd></div>
+            <div><dt>Email</dt><dd><span class="ph">Add your email</span></dd></div>
+            <div><dt>Hours</dt><dd>Mon–Sat, 10:00–18:00</dd></div>
+          </dl>
+        </div>
+        <form id="f" novalidate>
+          <input type="hidden" name="_subject" value="New Vaastu consultation request">
+          <div class="row">
+            <label for="f-name">Name<input id="f-name" name="name" required autocomplete="name"></label>
+            <label for="f-contact">Phone or email<input id="f-contact" name="contact" required></label>
+          </div>
+          <div class="row">
+            <label for="f-type">Property
+              <select id="f-type" name="type">
+                <option>Flat / apartment</option><option>Independent house</option>
+                <option>Office or shop</option><option>Plot (before buying)</option>
+              </select>
+            </label>
+            <label for="f-facing">Main entrance faces
+              <select id="f-facing" name="facing">
+                <option>Not sure</option><option>North</option><option>North-east</option><option>East</option>
+                <option>South-east</option><option>South</option><option>South-west</option><option>West</option><option>North-west</option>
+              </select>
+            </label>
+          </div>
+          <label for="f-msg">What would you like help with?<textarea id="f-msg" name="message" placeholder="e.g. We are moving into a 3BHK and the kitchen is in the north-east."></textarea></label>
+          <button class="btn primary" type="submit">Request a consultation</button>
+          <p class="form-note">Preview: requests are not sent until the Formspree form ID is added.</p>
+          <div class="done" id="f-done" hidden></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© Dishā Vaastu</span>
+      <span class="deva">वास्तु शास्त्र</span>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Form delivery: paste your Formspree form ID here (the part after /f/ in its endpoint). ----
+    // Both forms go to the same inbox; the email subject tells them apart.
+    const FORMSPREE_ID = "";
+
+    if (FORMSPREE_ID) document.querySelectorAll(".form-note").forEach(p => { p.hidden = true; });
+
+    async function sendForm(form, done, thanks) {
+      done.hidden = false;
+      if (!FORMSPREE_ID) {
+        done.textContent = "Preview only: this request was not sent. Add the Formspree form ID to start receiving requests.";
+        return;
+      }
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      done.textContent = "Sending…";
+      try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error(res.status);
+        done.textContent = thanks;
+        form.reset();
+      } catch {
+        done.textContent = "Your request could not be sent. Check your internet connection and try again, or contact us by phone.";
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    const ZONES = {
+      NW: { name: "Vayavya", dir: "North-west", deva: "वायव्य", deity: "Vayu", element: "Air", fill: "--air",
+            text: "The zone of movement and change. Good for things and people that come and go.",
+            suits: "Guest room, garage, grain store, toilet", avoid: "Master bedroom, puja room" },
+      N:  { name: "Uttara", dir: "North", deva: "उत्तर", deity: "Kubera", element: "Water", fill: "--water",
+            text: "Kubera's direction, linked with wealth and new opportunities. Keep it open and uncluttered.",
+            suits: "Entrance, living room, locker, study", avoid: "Heavy walls, staircase, kitchen" },
+      NE: { name: "Ishanya", dir: "North-east", deva: "ईशान्य", deity: "Ishana (Shiva)", element: "Water", fill: "--water",
+            text: "The most sacred corner. It should be the lightest, cleanest and most open part of the property.",
+            suits: "Puja room, open space, underground water tank, meditation", avoid: "Toilet, kitchen, heavy storage" },
+      W:  { name: "Paschima", dir: "West", deva: "पश्चिम", deity: "Varuna", element: "Space", fill: "--plain",
+            text: "Varuna's direction, associated with gains and the results of effort.",
+            suits: "Dining, children's room, study, overhead tank", avoid: "Main entrance in the south-west part of this side" },
+      C:  { name: "Brahmasthan", dir: "Centre", deva: "ब्रह्मस्थान", deity: "Brahma", element: "Space", fill: "--space",
+            text: "The nine central padas belong to Brahma. The centre is kept open, light and free of weight.",
+            suits: "Open courtyard, light, a clear floor", avoid: "Pillars, toilets, staircase, heavy furniture" },
+      E:  { name: "Purva", dir: "East", deva: "पूर्व", deity: "Indra and Surya", element: "Sun", fill: "--plain",
+            text: "Where the sun rises. Morning light from the east is valued for health and clarity.",
+            suits: "Main entrance, windows, living room, bathing area", avoid: "Tall structures that block morning light" },
+      SW: { name: "Nairutya", dir: "South-west", deva: "नैऋत्य", deity: "Nirruti (Pitru)", element: "Earth", fill: "--earth",
+            text: "The zone of stability. It should be the heaviest and highest part of the building.",
+            suits: "Master bedroom, heavy storage, overhead tank", avoid: "Main entrance, pits, underground tank, toilet" },
+      S:  { name: "Dakshina", dir: "South", deva: "दक्षिण", deity: "Yama", element: "Fire", fill: "--plain",
+            text: "Yama's direction. Solid walls and fewer openings here are considered protective.",
+            suits: "Bedrooms, storage, staircase", avoid: "Underground water, large openings" },
+      SE: { name: "Agneya", dir: "South-east", deva: "आग्नेय", deity: "Agni", element: "Fire", fill: "--fire",
+            text: "Agni's corner. Fire and electricity belong here.",
+            suits: "Kitchen, electrical panel, generator", avoid: "Water tank, bedroom, puja room" },
+    };
+    // 3x3 layout, north at top, east at right
+    const GRID = [["NW","N","NE"],["W","C","E"],["SW","S","SE"]];
+    const P = 40, Z = 120, NS = "http://www.w3.org/2000/svg";
+
+    const zonesG = document.getElementById("zones");
+    GRID.forEach((row, r) => row.forEach((key, c) => {
+      const z = ZONES[key];
+      const g = document.createElementNS(NS, "g");
+      g.setAttribute("class", "zone");
+      g.setAttribute("tabindex", "0");
+      g.setAttribute("role", "button");
+      g.setAttribute("aria-label", `${z.dir}, ${z.name}`);
+      g.dataset.key = key;
+      const rect = document.createElementNS(NS, "rect");
+      rect.setAttribute("class", "zfill");
+      Object.entries({ x: c * Z, y: r * Z, width: Z, height: Z }).forEach(([k, v]) => rect.setAttribute(k, v));
+      rect.style.fill = `var(${z.fill})`;
+      const t1 = document.createElementNS(NS, "text");
+      t1.setAttribute("class", "zlabel"); t1.setAttribute("text-anchor", "middle");
+      t1.setAttribute("x", c * Z + Z / 2); t1.setAttribute("y", r * Z + Z / 2 - 2);
+      t1.textContent = key === "C" ? "Centre" : key;
+      const t2 = document.createElementNS(NS, "text");
+      t2.setAttribute("class", "zsub"); t2.setAttribute("text-anchor", "middle");
+      t2.setAttribute("x", c * Z + Z / 2); t2.setAttribute("y", r * Z + Z / 2 + 16);
+      t2.textContent = z.deity.split(" ")[0];
+      g.append(rect, t1, t2);
+      g.addEventListener("click", () => select(key));
+      g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(key); } });
+      zonesG.append(g);
+    }));
+
+    // The 81 padas of the Paramashayika mandala, drawn over the zones
+    const padasG = document.getElementById("padas");
+    for (let i = 1; i < 9; i++) {
+      if (i % 3 === 0) continue;
+      [["x1", i * P, "y1", 0, "x2", i * P, "y2", 360], ["x1", 0, "y1", i * P, "x2", 360, "y2", i * P]].forEach(a => {
+        const l = document.createElementNS(NS, "line");
+        l.setAttribute("class", "pada");
+        for (let j = 0; j < a.length; j += 2) l.setAttribute(a[j], a[j + 1]);
+        padasG.append(l);
+      });
+    }
+
+    function select(key) {
+      const z = ZONES[key];
+      document.querySelectorAll(".zone").forEach(g => {
+        const on = g.dataset.key === key;
+        g.classList.toggle("on", on);
+        g.setAttribute("aria-pressed", on);
+      });
+      document.getElementById("d-name").textContent = `${z.name} · ${z.dir}`;
+      document.getElementById("d-deva").textContent = z.deva;
+      document.getElementById("d-chips").innerHTML =
+        `<span class="chip">Deity <b>${z.deity}</b></span><span class="chip">Element <b>${z.element}</b></span>`;
+      document.getElementById("d-text").textContent = z.text;
+      document.getElementById("d-suits").textContent = z.suits;
+      document.getElementById("d-avoid").textContent = z.avoid;
+    }
+    select("NE");
+
+    const ROOMS = [
+      ["Main entrance", "North, East, North-east", "North-west, West", "South-west"],
+      ["Kitchen", "South-east", "North-west", "North-east, South-west, Centre"],
+      ["Master bedroom", "South-west", "South, West", "North-east, South-east"],
+      ["Puja room", "North-east", "East, North", "South, South-west, beside a toilet"],
+      ["Children's room", "West", "North-west, East", "South-east"],
+      ["Guest room", "North-west", "North", "South-west"],
+      ["Study", "East, North-east", "North, West", "South-east"],
+      ["Toilet", "North-west, West", "South", "North-east, South-west, Centre"],
+      ["Staircase", "South, West, South-west", "South-east, North-west", "North-east, Centre"],
+      ["Underground water tank", "North-east, North", "East", "South-west, South-east, South"],
+      ["Overhead water tank", "South-west, West", "South", "North-east"],
+    ];
+    document.getElementById("room-rows").innerHTML = ROOMS.map(([room, best, ok, no]) =>
+      `<tr><th scope="row">${room}</th><td class="best">${best}</td><td class="ok">${ok}</td><td class="no">${no}</td></tr>`).join("");
+
+    // ---- Weekly rashifal: replace the dates and text below each week. ----
+    const RASHIFAL_WEEK = "2–8 November 2026";
+    const RASHIFAL = {
+      Mesha: "A lively start to the week. Put your energy into one important task and finish it before taking on more.",
+      Vrishabha: "Comfort and calm suit you now. Plan purchases rather than rushing them. Keep heavy furniture along the south wall for a settled home.",
+      Mithuna: "Calls and messages bring useful news. Write down what you agree, and read papers twice before signing. A west-facing desk helps you focus.",
+      Karka: "Home is where your heart is this week. A gentle conversation with family brings you closer.",
+      Simha: "Your efforts get noticed at work. Share the credit generously and keep your weekend free to rest.",
+      Kanya: "A good week to sort paperwork and daily routines. Small, steady improvements will save you effort later.",
+      Tula: "Partnerships are in focus. Listen fully before you decide, and keep spending on luxuries modest.",
+      Vrischika: "Quiet, focused work pays off. Keep new plans to yourself until they are settled. Keep the north of your home clean and open.",
+      Dhanu: "Learning and short trips are favoured. Advice from a teacher or elder proves useful. Sit facing east while you study or work.",
+      Makara: "Progress is slow but steady. Patience with seniors helps, and evenings are best kept for family.",
+      Kumbha: "Friends open new doors. Welcome a fresh idea, but keep to a budget.",
+      Meena: "Your intuition is strong. Some quiet time in prayer or meditation will help you make a clear choice.",
+    };
+
+    const DIR_TIPS = {
+      East: "Sit or work facing east, keep east windows clear for morning light, and keep the east side of the home uncluttered.",
+      South: "Sleep with your head to the south, and keep heavy furniture along south walls for stability.",
+      West: "A west-facing study or work desk suits you. Keep the west side of the home well lit in the evening.",
+      North: "Keep the north of your home open and clean. A water feature or plants in the north-east work well for you.",
+    };
+    const ELEMENT_DIR = { Fire: "East", Earth: "South", Air: "West", Water: "North" };
+    const RASHIS = [
+      ["Mesha", "मेष", "Aries", "Mars", "Fire", "Red, coral"],
+      ["Vrishabha", "वृषभ", "Taurus", "Venus", "Earth", "White, cream"],
+      ["Mithuna", "मिथुन", "Gemini", "Mercury", "Air", "Green"],
+      ["Karka", "कर्क", "Cancer", "Moon", "Water", "White, silver"],
+      ["Simha", "सिंह", "Leo", "Sun", "Fire", "Orange, gold"],
+      ["Kanya", "कन्या", "Virgo", "Mercury", "Earth", "Green"],
+      ["Tula", "तुला", "Libra", "Venus", "Air", "White, light blue"],
+      ["Vrischika", "वृश्चिक", "Scorpio", "Mars", "Water", "Red, maroon"],
+      ["Dhanu", "धनु", "Sagittarius", "Jupiter", "Fire", "Yellow"],
+      ["Makara", "मकर", "Capricorn", "Saturn", "Earth", "Dark blue, black"],
+      ["Kumbha", "कुम्भ", "Aquarius", "Saturn", "Air", "Blue"],
+      ["Meena", "मीन", "Pisces", "Jupiter", "Water", "Yellow"],
+    ];
+
+    const rashiGrid = document.getElementById("rashi-grid");
+    RASHIS.forEach(([name, deva, west]) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "rashi-tile";
+      b.id = `rashi-${name.toLowerCase()}`;
+      b.innerHTML = `<span class="deva">${deva}</span><span>${name}</span><small>${west}</small>`;
+      b.addEventListener("click", () => selectRashi(name));
+      rashiGrid.append(b);
+    });
+
+    function selectRashi(name) {
+      const [, deva, west, planet, element, colour] = RASHIS.find(r => r[0] === name);
+      const dir = ELEMENT_DIR[element];
+      rashiGrid.querySelectorAll(".rashi-tile").forEach(b =>
+        b.setAttribute("aria-pressed", b.id === `rashi-${name.toLowerCase()}`));
+      document.getElementById("r-name").textContent = `${name} · ${west}`;
+      document.getElementById("r-deva").textContent = deva;
+      document.getElementById("r-planet").textContent = planet;
+      document.getElementById("r-element").textContent = element;
+      document.getElementById("r-dir").textContent = dir;
+      document.getElementById("r-colour").textContent = colour;
+      document.getElementById("r-tip").textContent = DIR_TIPS[dir];
+      document.getElementById("r-week").textContent = RASHIFAL_WEEK;
+      document.getElementById("r-weekly").textContent = RASHIFAL[name];
+    }
+    selectRashi("Mesha");
+
+    const noTime = document.getElementById("k-notime");
+    noTime.addEventListener("change", () => { document.getElementById("k-time").disabled = noTime.checked; });
+
+    document.getElementById("k").addEventListener("submit", e => {
+      e.preventDefault();
+      const done = document.getElementById("k-done");
+      const missing = ["k-name", "k-contact", "k-date", "k-place"]
+        .map(id => document.getElementById(id)).find(el => !el.value.trim());
+      if (missing) {
+        done.textContent = "Add your name, contact, date of birth and place of birth so the chart can be drawn.";
+        done.hidden = false;
+        missing.focus();
+        return;
+      }
+      const name = document.getElementById("k-name").value.trim();
+      sendForm(e.target, done, `Thank you, ${name}. Your kundli request has been sent. We'll be in touch soon.`);
+    });
+
+    document.getElementById("f").addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("f-name");
+      const contact = document.getElementById("f-contact");
+      const done = document.getElementById("f-done");
+      if (!name.value.trim() || !contact.value.trim()) {
+        done.textContent = "Add your name and a phone number or email so we can reply.";
+        done.hidden = false;
+        (name.value.trim() ? contact : name).focus();
+        return;
+      }
+      sendForm(e.target, done, `Thank you, ${name.value.trim()}. Your request has been sent. We'll be in touch soon.`);
+    });
+  </script>
+</body>
+</html>
